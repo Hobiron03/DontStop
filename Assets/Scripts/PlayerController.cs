@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)//ブロックを踏んだ時の処理
     {
 
         if (other.gameObject.tag == "BlackBlock")
