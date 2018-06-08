@@ -1,0 +1,15 @@
+3,13,,,,,,,,,,
+
+w,b,b
+b,w,w
+w,b,w
+b,w,b
+b,w,s
+b,w,b
+w,b,b
+b,w,w
+w,b,w
+b,w,b
+b,w,s
+b,w,b
+s,s,s

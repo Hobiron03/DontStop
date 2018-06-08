@@ -1,0 +1,48 @@
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+Assets/mmmm
+Assets/Demigiant
+Assets/Resouces
+Assets/UI - BUILDER/
+Assets/Gamestrap/
+Assets/Pixel Arsenal/
+Assets/TextMesh Pro/
+Assets/Sound/
+Assets/Resources
+Assets/SimpleSky
+.vs/Can'tStop/v15/Server/sqlite3/db.lock
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+# ============ #
+# for others #
+# ============ #
+*.log #log files, for some plugins
+*.pyc #python bytecode cache, for some plugins.
+sysinfo.txt #Unity3D Generated File On Crash Reports
