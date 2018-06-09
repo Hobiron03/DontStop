@@ -1,4 +1,4 @@
-﻿//Time,score,poseのUI管理（見た目だけ）
+﻿//Time,score,poseのUI
 
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using TMPro;
 
 public class UIController : MonoBehaviour {
+
+    public GameObject gameController;
 
     public GameObject timerUI;
     TextMeshProUGUI timeScript;
@@ -48,5 +50,15 @@ public class UIController : MonoBehaviour {
     {
         dist = dist > 0 ? dist - 1 : dist;
         distScript.text = dist.ToString();
+    }
+
+    public void PushPoseButton()
+    {
+        gameController.GetComponent<GameController>().Pause();
+    }
+
+    public void PushContinueButton()
+    {
+        gameController.GetComponent<GameController>().CancelPause();
     }
 }
