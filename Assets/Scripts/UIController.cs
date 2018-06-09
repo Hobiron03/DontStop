@@ -8,11 +8,12 @@ using TMPro;
 
 public class UIController : MonoBehaviour {
 
-    public GameObject timer;
+    public GameObject timerUI;
     TextMeshProUGUI timeScript;
 
-    public GameObject score;
-    TextMeshProUGUI scoreScript;
+    public GameObject distanceUI;
+    TextMeshProUGUI distScript;
+    private int dist = 0;
 
     private float CanPlayTime = 30;
     private float count;
@@ -20,9 +21,11 @@ public class UIController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        timeScript = timer.GetComponent<TextMeshProUGUI>();
+        timeScript = timerUI.GetComponent<TextMeshProUGUI>();
         timeScript.text = CanPlayTime.ToString();
-        scoreScript = score.GetComponent<TextMeshProUGUI>();
+
+        distScript = distanceUI.GetComponent<TextMeshProUGUI>();
+        distScript.text = dist.ToString();
 	}
 	
 	// Update is called once per frame
@@ -34,4 +37,16 @@ public class UIController : MonoBehaviour {
 
         //キョリを上げていく
 	}
+
+    //スコアである距離を伸ばす
+    public void IncreaseDist()
+    {
+        dist += 1;
+        distScript.text = dist.ToString();
+    }
+    public void DecreaseDist()
+    {
+        dist = dist > 0 ? dist - 1 : dist;
+        distScript.text = dist.ToString();
+    }
 }

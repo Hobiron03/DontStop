@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
     public AudioClip damageSound;
    
     public GameObject mainCamera;
+    public GameObject UIController;//現在の距離（スコア）を表すUI
 
 
 
@@ -65,43 +66,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-  
-    void Move()
-    {
-        time += Time.deltaTime; //連続操作できないようにする
-        if (time > operationInterval)
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                transform.DOJump(new Vector3(1.5f, 0, 0), 1.2f, 1, operationInterval + 0.04f).SetEase(Ease.Linear);//jumpアニメーションしながら移動
-                audio.PlayOneShot(jumpSound);
-
-                //stageを動かしplayerが動いているかのように見せる
-                Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
-                stage.transform.DOMove(newPos, operationInterval);
-                time = 0f;
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                transform.DOJump(new Vector3(-0.5f, 0, 0), 1.2f, 1, operationInterval).SetEase(Ease.Linear);//jumpアニメーション
-                audio.PlayOneShot(jumpSound);
-
-                Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
-                stage.transform.DOMove(newPos, operationInterval);
-                time = 0f;
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                transform.DOJump(new Vector3(0.5f, 0, 0), 1.2f, 1, operationInterval).SetEase(Ease.Linear);//jumpアニメーション
-                audio.PlayOneShot(jumpSound);
-
-                Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
-                stage.transform.DOMove(newPos, operationInterval);
-                time = 0f;
-            }
-        }
-    }
-
     //後戻り機能ありの操作方法
     void Move2()
     {
@@ -114,11 +78,13 @@ public class PlayerController : MonoBehaviour {
                 if (transform.position.x < 0.6f)
                 {
                     MoveRight();
+                    UIController.GetComponent<UIController>().IncreaseDist();
                     audio.PlayOneShot(jumpSound);
                 }
                 else
                 {
                     MoveStraigt();
+                    UIController.GetComponent<UIController>().IncreaseDist();
                     audio.PlayOneShot(jumpSound);
                 }
                 time = 0f;
@@ -129,11 +95,13 @@ public class PlayerController : MonoBehaviour {
                 if (transform.position.x > -0.4f)
                 {
                     MoveLeft();
+                    UIController.GetComponent<UIController>().IncreaseDist();
                     audio.PlayOneShot(jumpSound);
                 }
                 else
                 {
                     MoveStraigt();
+                    UIController.GetComponent<UIController>().IncreaseDist();
                     audio.PlayOneShot(jumpSound);
                 }
 
@@ -142,6 +110,7 @@ public class PlayerController : MonoBehaviour {
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 MoveStraigt();
+                UIController.GetComponent<UIController>().IncreaseDist();
                 audio.PlayOneShot(jumpSound);
                 time = 0f;
             }
@@ -178,14 +147,16 @@ public class PlayerController : MonoBehaviour {
                     time = 0f;
                 }
 
+                UIController.GetComponent<UIController>().DecreaseDist();
+
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)//ブロックを踏んだ時の処理
+    private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.tag == "BlackBlock")
+        if (other.gameObject.tag == "BlackBlock")//ブロックを踏んだ時の処理
         {
             if (hp <= 0)
             {
@@ -207,7 +178,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
         stage.transform.DOMove(newPos, operationInterval);
 
-        OperateHist.Add(LEFT);
+        OperateHist.Add(LEFT);//行動履歴に追加
     }
 
     void MoveLeft()
@@ -240,7 +211,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void Blink()//一定時間点滅させる
+    void Blink()//一定時間(blinkTime)の間点滅させる
     {
         bTime += Time.deltaTime;
         if (blinkInterval > bTime)

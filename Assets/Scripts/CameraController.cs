@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 
-    public void ShakeCamera()
+    public void ShakeCamera()//ダメージを受けた時の揺れ演出
     {
         gameObject.transform.DOShakePosition(0.5f, new Vector3(0.4f, 0.4f, 0.1f), vibrato, randomness, snapping);
     }
