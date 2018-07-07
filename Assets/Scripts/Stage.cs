@@ -80,7 +80,7 @@ public class Stage : MonoBehaviour {
         stageData.data = mapdata;
     }
 
-    void CreateMap()
+    public void CreateMap()
     {
         for (int x = 0; x < stageData.width; x++)
         {

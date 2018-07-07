@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     int hp = 3;
 
+    public GameController gameController;
+
     private Vector3 newPos;
     private float operationInterval = 0.23f;
     private float time = 0.0f;
@@ -24,8 +26,8 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject stage;
 
-    //行動履歴を格納しておくリスト。行動を戻すときに使う
-    private List<int> OperateHist = new List<int>();
+    //行動履歴を格納しておくスタック。行動を戻すときに使う
+    private Stack<int> OpeHist = new Stack<int>();
     private const int LEFT = 0;
     private const int RIGHT = 1;
     private const int STRIGHT = 2;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour {
     public AudioClip destroySound;
     public AudioClip jumpSound;
     public AudioClip damageSound;
+    public AudioClip getCoinSound;
    
     public GameObject mainCamera;
     public GameObject UIController;//現在の距離（スコア）を表すUI
@@ -116,8 +119,8 @@ public class PlayerController : MonoBehaviour {
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow))//行動の巻き戻し
             {
-                var opeNum = OperateHist.Last();
-                OperateHist.RemoveAt(OperateHist.Count - 1);//最後の行動履歴を削除
+
+                var opeNum = OpeHist.Pop();//最後の行動履歴を削除
 
                 if (opeNum == LEFT)
                 {
@@ -153,20 +156,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.tag == "BlackBlock")//ブロックを踏んだ時の処理
+        if (other.gameObject.tag == "BlackBlock")//黒ブロックを踏んだ時の処理
         {
-            if (hp <= 0)
-            {
-                PlayerDestroy();
-            }
-            else
-            {
-                PlayerDamaged();
-            }
+            PlayerDamaged();
         }
+
+        if (other.gameObject.tag == "Coin")
+        {
+            GetCoin();
+        }
+
     }
 
 
@@ -177,8 +180,9 @@ public class PlayerController : MonoBehaviour {
         //stageを動かしplayerが動いているかのように見せる
         Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
         stage.transform.DOMove(newPos, operationInterval);
-
-        OperateHist.Add(LEFT);//行動履歴に追加
+        
+        //行動履歴に追加
+        OpeHist.Push(LEFT);
     }
 
     void MoveLeft()
@@ -188,7 +192,7 @@ public class PlayerController : MonoBehaviour {
         Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
         stage.transform.DOMove(newPos, operationInterval);
 
-        OperateHist.Add(RIGHT);
+        OpeHist.Push(RIGHT);
     }
 
     void MoveStraigt()
@@ -198,13 +202,19 @@ public class PlayerController : MonoBehaviour {
         Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
         stage.transform.DOMove(newPos, operationInterval);
 
-        OperateHist.Add(STRIGHT);
+        OpeHist.Push(STRIGHT);
     }
 
 
+    //playerがダメージ受けた時の処理
     void PlayerDamaged()
     {
         hp--;
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         mainCamera.GetComponent<CameraController>().ShakeCamera();//被ダメージのカメラの揺れ演出
         isDamaged = true;
         audio.PlayOneShot(damageSound);
@@ -237,6 +247,12 @@ public class PlayerController : MonoBehaviour {
         //削除すると音が鳴らなくなる対策
         AudioSource.PlayClipAtPoint(destroySound, mainCamera.transform.position);
         Destroy(gameObject);
+    }
+
+    void GetCoin()
+    {
+        gameController.GetComponent<GameController>().AddCoinScore();
+        audio.PlayOneShot(getCoinSound);
     }
 
 }

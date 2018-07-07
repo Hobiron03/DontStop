@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SkyController : MonoBehaviour {
 
+    private bool DontDestroyEnable = true;
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+     //   if (DontDestroyEnable)
+      //  {
+        //    DontDestroyOnLoad(gameObject);
+       // }
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        gameObject.transform.Rotate(0,Time.deltaTime * 1.3f,0);	
+        gameObject.transform.Rotate(0,Time.deltaTime * 3.0f,0);	
 	}
 }

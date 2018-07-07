@@ -17,7 +17,9 @@ public class UIController : MonoBehaviour {
     TextMeshProUGUI distScript;
     private int dist = 0;
 
-    private float CanPlayTime = 30;
+    public GameObject PoseUI;
+
+    private float CanPlayTime = 31;
     private float count;
 
 	// Use this for initialization
@@ -55,6 +57,7 @@ public class UIController : MonoBehaviour {
     public void PushPoseButton()
     {
         gameController.GetComponent<GameController>().Pause();
+        PoseUI.GetComponent<AudioSource>().Play();
     }
 
     public void PushContinueButton()
