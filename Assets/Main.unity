@@ -2922,6 +2922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6422c8d5d473bd0488f8d358efa6764b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1413093345}
   uiController: {fileID: 156262869}
   gameController: {fileID: 1767635485}
   countDownUI: {fileID: 2104317882}

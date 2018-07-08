@@ -6,6 +6,7 @@ using TMPro;
 
 public class CountDownStart : MonoBehaviour {
 
+    public GameObject player;
     public GameObject uiController;
     public GameObject gameController;
 
@@ -15,6 +16,7 @@ public class CountDownStart : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        player.GetComponent<PlayerController>().enabled = false;
         uiController.SetActive(false);
         countDown = countDownUI.GetComponent<TextMeshProUGUI>();
         StartCoroutine(CountDownCoroutine());
@@ -52,6 +54,7 @@ public class CountDownStart : MonoBehaviour {
 
     void GameStart()
     {
+        player.GetComponent<PlayerController>().enabled = true;
         gameController.GetComponent<GameController>().GameStart();
     }
 }

@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
     public GameController gameController;
 
     private Vector3 newPos;
-    private float operationInterval = 0.23f;
+    private float operationInterval = 0.23f;//連続操作対策
     private float time = 0.0f;
 
     private MeshRenderer playerMesh;
@@ -58,26 +58,26 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        //ダメージを受けたら点滅して一定時間操作不可になる
+       
         if (isDamaged)
         {
-            Blink();
+            Blink();  //ダメージを受けたら点滅して一定時間操作不可になる
         }
         else
         {
-            Move2(); //点滅中は動けない
+            Move(); //点滅中は動けない
         }
     }
 
     //後戻り機能ありの操作方法
-    void Move2()
+    void Move()
     {
         time += Time.deltaTime;//連続操作できないようにする
         if (time > operationInterval)
         {
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                //右のブロックにいるときは右に移動できないようにする
+                //右のブロックにいるときは右に移動せず前に移動する
                 if (transform.position.x < 0.6f)
                 {
                     MoveRight();
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                //左のブロックにいるときは左に移動できないようにする
+                //左のブロックにいるときは左に移動せず前に移動する
                 if (transform.position.x > -0.4f)
                 {
                     MoveLeft();
