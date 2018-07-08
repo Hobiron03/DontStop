@@ -7,10 +7,12 @@ public class Stage : MonoBehaviour {
     //blockの種類
     private const char B_BLOCK = 'b';
     private const char W_BLOCK = 'w';
+    private const char C_BLOCK = 'c';
     private const char S_BLOCK = 's';
 
     public GameObject blackBlock;
     public GameObject whiteBlock;
+    public GameObject coinBlock;
     public GameObject startBlock;
 
     // マップのデータ.
@@ -103,6 +105,10 @@ public class Stage : MonoBehaviour {
                         break;
                     case W_BLOCK:
                         obj = Instantiate(whiteBlock, blockPos, Quaternion.identity);
+                        obj.transform.parent = stages.transform;
+                        break;
+                    case C_BLOCK:
+                        obj = Instantiate(coinBlock, blockPos, Quaternion.identity);
                         obj.transform.parent = stages.transform;
                         break;
                     default:

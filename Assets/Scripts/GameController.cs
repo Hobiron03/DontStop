@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
 
     public GameObject pauseUI;
     public GameObject bgmObject;
+    public GameObject uiController;
 
     private int countdown;
     private int getCoinNum = 0; //獲得したコインの数
@@ -23,6 +24,11 @@ public class GameController : MonoBehaviour {
 	    	
 	}
 
+    public void GameStart()
+    {
+        uiController.SetActive(true);
+        bgmObject.SetActive(true);
+    }
 
     public void Pause()//一時停止！！
     {

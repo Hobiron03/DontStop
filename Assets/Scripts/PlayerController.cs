@@ -209,12 +209,6 @@ public class PlayerController : MonoBehaviour {
     //playerがダメージ受けた時の処理
     void PlayerDamaged()
     {
-        hp--;
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
-
         mainCamera.GetComponent<CameraController>().ShakeCamera();//被ダメージのカメラの揺れ演出
         isDamaged = true;
         audio.PlayOneShot(damageSound);

@@ -25,6 +25,7 @@ public class UIController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+
         timeScript = timerUI.GetComponent<TextMeshProUGUI>();
         timeScript.text = CanPlayTime.ToString();
 
