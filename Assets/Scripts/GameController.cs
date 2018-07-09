@@ -8,6 +8,11 @@ public class GameController : MonoBehaviour {
     public GameObject pauseUI;
     public GameObject bgmObject;
     public GameObject uiController;
+    public GameObject fadeCanvas;
+
+    public GameObject canvas;
+
+    Fade fade;
 
     private int countdown;
     private int getCoinNum = 0; //獲得したコインの数
@@ -16,7 +21,8 @@ public class GameController : MonoBehaviour {
 	void Start ()
     {
         Time.timeScale = 1.0f; //シーン遷移時にアニメーションが動かなくるバグの回避処理
-	}
+        FadeLoad(); //fadeoutしながら遷移する
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -58,5 +64,17 @@ public class GameController : MonoBehaviour {
     {
         getCoinNum += 1;
         Debug.Log(getCoinNum);
+    }
+
+    void FadeLoad()
+    {
+        fade = fadeCanvas.GetComponent<Fade>();//シーン読み込み時にfadeしながら読み込む
+        fade.FadeIn(0.2f);
+        Invoke("FadeLoad2", 0.3f);
+    }
+    void FadeLoad2()
+    {
+        canvas.SetActive(false);
+        fade.FadeOut(0.5f);
     }
 }

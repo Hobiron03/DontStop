@@ -195,7 +195,7 @@ Prefab:
     - target: {fileID: 11486218, guid: 53c22e1773be7f84aad8ed8b7b58fa6e, type: 2}
       propertyPath: maskTexture
       value: 
-      objectReference: {fileID: 2800000, guid: bdc03fd64f6d70448944951a059cbe00, type: 3}
+      objectReference: {fileID: 2800000, guid: dcdab3cbc5a449241b6aba8798afd306, type: 3}
     - target: {fileID: 11486218, guid: 53c22e1773be7f84aad8ed8b7b58fa6e, type: 2}
       propertyPath: m_Enabled
       value: 0
@@ -228,8 +228,9 @@ GameObject:
   m_Component:
   - component: {fileID: 409920987}
   - component: {fileID: 409920988}
+  - component: {fileID: 409920989}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: MenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,11 +255,23 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 409920986}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d031c38be83bb04aab57da2fe71093f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &409920989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409920986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83d6d16dcbe73e498c75f452d0a2a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeCanvas: {fileID: 1664074906}
 --- !u!1 &593106260
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,3 +546,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 43432830f1db3574e9f698d80b00c314, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1664074906 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 141186, guid: 53c22e1773be7f84aad8ed8b7b58fa6e, type: 2}
+  m_PrefabInternal: {fileID: 165525302}
