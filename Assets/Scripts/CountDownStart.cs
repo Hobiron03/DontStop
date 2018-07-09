@@ -16,10 +16,14 @@ public class CountDownStart : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        Debug.Log("hello");
+        StartCoroutine(CountDownCoroutine());
+
+
         player.GetComponent<PlayerController>().enabled = false;
         uiController.SetActive(false);
         countDown = countDownUI.GetComponent<TextMeshProUGUI>();
-        StartCoroutine(CountDownCoroutine());
+       
 
        // Invoke("GameStart", 3.0f);
 	}
@@ -34,7 +38,7 @@ public class CountDownStart : MonoBehaviour {
     IEnumerator CountDownCoroutine()
     {
         countDownUI.SetActive(true);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         countDown.text = "3";
         yield return new WaitForSeconds(1.0f);

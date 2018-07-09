@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            Move(); //点滅中は動けない
+            Move(); //点滅時以外は動ける
         }
     }
 

@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-       // Time.timeScale = 0f;	
+        Time.timeScale = 1.0f; //シーン遷移時にアニメーションが動かなくるバグの回避処理
 	}
 	
 	// Update is called once per frame
@@ -46,7 +46,12 @@ public class GameController : MonoBehaviour {
 
     public void returnTitle()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadSceneAsync("Title");
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadSceneAsync("Main");
     }
 
     public void AddCoinScore()

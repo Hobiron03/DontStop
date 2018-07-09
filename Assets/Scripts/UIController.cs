@@ -65,4 +65,9 @@ public class UIController : MonoBehaviour {
     {
         gameController.GetComponent<GameController>().CancelPause();
     }
+
+    public void PushRestartButton()
+    {
+        gameController.GetComponent<GameController>().Restart();
+    }
 }

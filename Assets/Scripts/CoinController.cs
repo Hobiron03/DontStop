@@ -13,6 +13,7 @@ public class CoinController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        Debug.Log("hello");
         gameObject.transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);	
 	}
 
