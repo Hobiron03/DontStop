@@ -52,12 +52,12 @@ public class GameController : MonoBehaviour {
 
     public void returnTitle()
     {
-        SceneManager.LoadSceneAsync("Title");
+        LoadTitleScene();
     }
 
     public void Restart()
     {
-        SceneManager.LoadSceneAsync("Main");
+        ReloadMainScene();
     }
 
     public void AddCoinScore()
@@ -66,15 +66,41 @@ public class GameController : MonoBehaviour {
         Debug.Log(getCoinNum);
     }
 
+
+    void ReloadMainScene()
+    {
+        Time.timeScale = 1.0f;
+        fade.FadeIn(0.5f);
+        Invoke("LoadMain", 0.5f);
+    }
+    void LoadTitleScene()
+    {
+        Time.timeScale = 1.0f;
+        fade.FadeIn(0.5f);
+        Invoke("LoadMenu", 0.5f);
+    }
+
+    void LoadMain()
+    {
+        SceneManager.LoadSceneAsync("Main");
+    }
+    void LoadMenu()
+    {
+        SceneManager.LoadSceneAsync("Title");
+    }
+
+
+    //fade start
     void FadeLoad()
     {
         fade = fadeCanvas.GetComponent<Fade>();//シーン読み込み時にfadeしながら読み込む
         fade.FadeIn(0.2f);
-        Invoke("FadeLoad2", 0.3f);
+        Invoke("FadeLoad2", 0.5f);
     }
     void FadeLoad2()
     {
         canvas.SetActive(false);
         fade.FadeOut(0.5f);
     }
+    //fade end
 }
