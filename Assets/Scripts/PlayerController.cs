@@ -45,7 +45,18 @@ public class PlayerController : MonoBehaviour {
     public GameObject mainCamera;
     public GameObject UIController;//現在の距離（スコア）を表すUI
 
-
+    private Vector3 touchStartPos; //フリックのための値
+    private Vector3 touchEndPos;
+    private enum FLICK_DIR //フリックの状態
+    {
+        IDOL,
+        TOUCH,
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN,
+    }
+    private FLICK_DIR flickDir = FLICK_DIR.IDOL;
 
 
     // Use this for initialization
@@ -65,6 +76,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            Flick();
             Move(); //点滅時以外は動ける
         }
     }
@@ -75,49 +87,39 @@ public class PlayerController : MonoBehaviour {
         time += Time.deltaTime;//連続操作できないようにする
         if (time > operationInterval)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.RightArrow) || flickDir == FLICK_DIR.RIGHT)
             {
                 //右のブロックにいるときは右に移動せず前に移動する
                 if (transform.position.x < 0.6f)
                 {
                     MoveRight();
-                    UIController.GetComponent<UIController>().IncreaseDist();
-                    audio.PlayOneShot(jumpSound);
                 }
                 else
                 {
                     MoveStraigt();
-                    UIController.GetComponent<UIController>().IncreaseDist();
-                    audio.PlayOneShot(jumpSound);
                 }
                 time = 0f;
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) || flickDir == FLICK_DIR.LEFT)
             {
                 //左のブロックにいるときは左に移動せず前に移動する
                 if (transform.position.x > -0.4f)
                 {
                     MoveLeft();
-                    UIController.GetComponent<UIController>().IncreaseDist();
-                    audio.PlayOneShot(jumpSound);
                 }
                 else
                 {
                     MoveStraigt();
-                    UIController.GetComponent<UIController>().IncreaseDist();
-                    audio.PlayOneShot(jumpSound);
                 }
 
                 time = 0f;
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow) || flickDir == FLICK_DIR.DOWN)
             {
                 MoveStraigt();
-                UIController.GetComponent<UIController>().IncreaseDist();
-                audio.PlayOneShot(jumpSound);
                 time = 0f;
             }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))//行動の巻き戻し
+            else if (Input.GetKeyDown(KeyCode.UpArrow) || flickDir == FLICK_DIR.UP)//行動の巻き戻し
             {
 
                 var opeNum = OpeHist.Pop();//最後の行動履歴を削除
@@ -150,8 +152,54 @@ public class PlayerController : MonoBehaviour {
                     time = 0f;
                 }
 
+                flickDir = FLICK_DIR.IDOL;
                 UIController.GetComponent<UIController>().DecreaseDist();
 
+            }
+        }
+    }
+
+    void Flick()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            touchStartPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            touchEndPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
+
+            GetDirection();
+        }
+    }
+    void GetDirection()
+    {
+        float directionX = touchEndPos.x - touchStartPos.x;
+        float directionY = touchEndPos.y - touchStartPos.y;
+
+       
+        if (Mathf.Abs(directionY) < Mathf.Abs(directionX))
+        {
+            if (30 < directionX)
+            {
+                //右向きにフリック
+                flickDir = FLICK_DIR.RIGHT;
+            }
+            else if (-30 > directionX)
+            {
+                //左向きにフリック
+                flickDir = FLICK_DIR.LEFT;
+            }
+        }
+        else if (Mathf.Abs(directionX)<Mathf.Abs(directionY))
+            {
+            if (30 < directionY){
+                //上向きにフリック
+                flickDir = FLICK_DIR.UP;
+            }else if (-30 > directionY){
+                //下向きのフリック
+                flickDir = FLICK_DIR.DOWN;
             }
         }
     }
@@ -180,8 +228,12 @@ public class PlayerController : MonoBehaviour {
         //stageを動かしplayerが動いているかのように見せる
         Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
         stage.transform.DOMove(newPos, operationInterval);
-        
+
+        UIController.GetComponent<UIController>().IncreaseDist();
+        audio.PlayOneShot(jumpSound);
+
         //行動履歴に追加
+        flickDir = FLICK_DIR.IDOL;
         OpeHist.Push(LEFT);
     }
 
@@ -192,6 +244,10 @@ public class PlayerController : MonoBehaviour {
         Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
         stage.transform.DOMove(newPos, operationInterval);
 
+        UIController.GetComponent<UIController>().IncreaseDist();
+        audio.PlayOneShot(jumpSound);
+
+        flickDir = FLICK_DIR.IDOL;
         OpeHist.Push(RIGHT);
     }
 
@@ -202,6 +258,10 @@ public class PlayerController : MonoBehaviour {
         Vector3 newPos = new Vector3(stage.transform.position.x, stage.transform.position.y, stage.transform.position.z + 1);
         stage.transform.DOMove(newPos, operationInterval);
 
+        UIController.GetComponent<UIController>().IncreaseDist();
+        audio.PlayOneShot(jumpSound);
+
+        flickDir = FLICK_DIR.IDOL;
         OpeHist.Push(STRIGHT);
     }
 

@@ -82,7 +82,7 @@ public class GameController : MonoBehaviour {
 
     void LoadMain()
     {
-        SceneManager.LoadSceneAsync("Main");
+        SceneManager.LoadScene("Main");
     }
     void LoadMenu()
     {
@@ -94,7 +94,7 @@ public class GameController : MonoBehaviour {
     void FadeLoad()
     {
         fade = fadeCanvas.GetComponent<Fade>();//シーン読み込み時にfadeしながら読み込む
-        fade.FadeIn(0.2f);
+        fade.FadeIn(0.1f);
         Invoke("FadeLoad2", 0.5f);
     }
     void FadeLoad2()

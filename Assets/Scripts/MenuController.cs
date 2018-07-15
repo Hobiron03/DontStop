@@ -34,6 +34,6 @@ public class MenuController : MonoBehaviour {
     }
     void LoadMain()
     {
-        SceneManager.LoadSceneAsync("Main");
+        SceneManager.LoadScene("Main");
     }
 }
