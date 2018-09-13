@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
     private Vector3 touchEndPos;
     private enum FLICK_DIR //フリックの状態
     {
-        IDOL,
+        IDOL, //何もしていない状態
         TOUCH,
         LEFT,
         RIGHT,
@@ -76,7 +76,6 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            Flick();
             Move(); //点滅時以外は動ける
         }
     }
@@ -84,6 +83,7 @@ public class PlayerController : MonoBehaviour {
     //後戻り機能ありの操作方法
     void Move()
     {
+        Flick();
         time += Time.deltaTime;//連続操作できないようにする
         if (time > operationInterval)
         {

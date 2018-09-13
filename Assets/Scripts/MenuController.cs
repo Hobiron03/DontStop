@@ -14,7 +14,6 @@ public class MenuController : MonoBehaviour {
         Time.timeScale = 1.0f;
       
         fade = FadeCanvas.GetComponent<Fade>();
-       
     }
 	
 	// Update is called once per frame
@@ -27,7 +26,7 @@ public class MenuController : MonoBehaviour {
 
 	}
 
-    void LoadGameScene()
+    public void LoadGameScene()
     {
         fade.FadeIn(0.5f);
         Invoke("LoadMain", 0.5f);
