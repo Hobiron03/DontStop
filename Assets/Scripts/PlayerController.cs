@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     private float time = 0.0f;
 
     private MeshRenderer playerMesh;
-    private float blinkTime = 1.0f; //ダメージを受けた時の点滅時間
+    private float blinkTime = 1.2f; //ダメージを受けた時の点滅時間
     private float blinkInterval = 0.1f; //点滅の周期時間
     private float bTime = 0.0f; //
     private float bTime2 = 0.0f;

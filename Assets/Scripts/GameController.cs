@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
 
     public GameObject canvas;
 
+    public GameObject player;
+
     Fade fade;
 
     private int countdown;
@@ -62,8 +64,14 @@ public class GameController : MonoBehaviour {
 
     public void AddCoinScore()
     {
+        uiController.GetComponent<UIController>().IncreaseCoin();
         getCoinNum += 1;
         Debug.Log(getCoinNum);
+    }
+
+    public void GameFinish()
+    {
+        player.GetComponent<PlayerController>().enabled = false;
     }
 
 

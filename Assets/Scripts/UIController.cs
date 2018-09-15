@@ -10,6 +10,10 @@ public class UIController : MonoBehaviour {
 
     public GameObject gameController;
 
+    public GameObject resultUI;
+    public GameObject finishUI;
+    public GameObject systemUI;
+
     public GameObject timerUI;
     TextMeshProUGUI timeScript;
     private RectTransform timerUITransform;
@@ -17,6 +21,10 @@ public class UIController : MonoBehaviour {
     public GameObject distanceUI;
     TextMeshProUGUI distScript;
     private int dist = 0;
+
+    public GameObject CoinUI;
+    TextMeshProUGUI coinScript;
+    private int coinNum = 0;
 
     public GameObject PoseUI;
 
@@ -29,6 +37,18 @@ public class UIController : MonoBehaviour {
     private float timeInterval = 1.0f;
     private float time = 1.0f;
 
+
+    private IEnumerator resultDisplayCoroutine()
+    {
+        DisplayFinishText();
+
+        yield return new WaitForSeconds(1.5f);
+
+        DisplayRsult();
+
+        Debug.Log("1byoumattayo");
+    }
+
 	// Use this for initialization
 	void Start ()
     {
@@ -39,6 +59,8 @@ public class UIController : MonoBehaviour {
         distScript = distanceUI.GetComponent<TextMeshProUGUI>();
         distScript.text = dist.ToString();
 
+        coinScript = CoinUI.GetComponent<TextMeshProUGUI>();
+        coinScript.text = coinNum.ToString();
 
 	}
 	
@@ -74,6 +96,12 @@ public class UIController : MonoBehaviour {
         distScript.text = dist.ToString();
     }
 
+    public void IncreaseCoin()
+    {
+        coinNum += 1;
+        coinScript.text = coinNum.ToString();
+    }
+
     public void CountTime()
     {
         //タイムを1秒ずつ減らしていく
@@ -100,6 +128,9 @@ public class UIController : MonoBehaviour {
             timeScript.text = 0.0f.ToString("F1");
             isTimeUp = true;
             isStartPerform = false;
+
+            gameController.GetComponent<GameController>().GameFinish();
+            StartCoroutine("resultDisplayCoroutine");
         }
     }
 
@@ -111,7 +142,7 @@ public class UIController : MonoBehaviour {
             Sequence timerSequence = DOTween.Sequence()
                 .OnStart(() =>
                 {
-                    timerUITransform.DOScale(new Vector3(1.25f, 1.25f, 1.25f), 0.3f);
+                    timerUITransform.DOScale(new Vector3(1.34f, 1.34f, 1.34f), 0.3f);
                 })
                 .Append(timerUITransform.DOScale(new Vector3(1.05f, 1.05f, 1.05f), 0.7f));
 
@@ -119,6 +150,29 @@ public class UIController : MonoBehaviour {
 
             time = 0;
         }
+    }
+
+    private void DisplayFinishText()
+    {
+        finishUI.SetActive(true);
+
+        Sequence FinishTextSequence = DOTween.Sequence()
+                .OnStart(() =>
+                {
+                    finishUI.GetComponent<RectTransform>().DOScale(new Vector3(1.0f, 1.0f, 1.0f), 0.2f);
+                })
+                .AppendInterval(0.9f)
+                .Append(finishUI.GetComponent<RectTransform>().DOScale(new Vector3(0.01f, 0.01f, 0.01f), 0.2f));
+
+        FinishTextSequence.Play();
+
+        
+    }
+
+    void DisplayRsult()
+    {
+        systemUI.SetActive(false);
+        resultUI.GetComponent<RectTransform>().DOLocalMoveY(0, 0.3f);
     }
 
     public void PushPoseButton()

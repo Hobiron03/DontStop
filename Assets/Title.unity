@@ -646,7 +646,8 @@ Transform:
 --- !u!1 &685073955
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 187946, guid: 71470901b9fe0444394ea72f07f208ac, type: 2}
+  m_PrefabParentObject: {fileID: 1430482969398106, guid: 96cd1a9405a27de48a89121d3ecba3db,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
@@ -663,15 +664,14 @@ GameObject:
 --- !u!224 &685073956
 RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22487946, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 224081637383431376, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 685073955}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1184252440}
+  m_Children: []
   m_Father: {fileID: 1996935068}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -683,7 +683,7 @@ RectTransform:
 --- !u!114 &685073957
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11487946, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 114224541467700436, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 685073955}
@@ -711,7 +711,7 @@ MonoBehaviour:
 --- !u!222 &685073958
 CanvasRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22287946, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 222213931207935698, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 685073955}
@@ -1220,7 +1220,8 @@ CanvasRenderer:
 --- !u!1 &1184252439
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 187910, guid: 71470901b9fe0444394ea72f07f208ac, type: 2}
+  m_PrefabParentObject: {fileID: 1865823181755658, guid: 96cd1a9405a27de48a89121d3ecba3db,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
@@ -1237,26 +1238,26 @@ GameObject:
 --- !u!224 &1184252440
 RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22487910, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 224448410139945548, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184252439}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 685073956}
-  m_RootOrder: 0
+  m_Father: {fileID: 1996935068}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 9.000009}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1184252441
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11487906, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 114093586218424698, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184252439}
@@ -1284,7 +1285,7 @@ MonoBehaviour:
 --- !u!222 &1184252442
 CanvasRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22287912, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 222815419479258780, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184252439}
@@ -2141,7 +2142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 54, y: -203}
+  m_AnchoredPosition: {x: 72.7, y: -203}
   m_SizeDelta: {x: 136.3, y: 136.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1696724089
@@ -2151,7 +2152,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1696724087}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -2308,7 +2309,8 @@ CanvasRenderer:
 --- !u!1 &1996935067
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 187920, guid: 71470901b9fe0444394ea72f07f208ac, type: 2}
+  m_PrefabParentObject: {fileID: 1561003380401646, guid: 96cd1a9405a27de48a89121d3ecba3db,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
@@ -2325,7 +2327,7 @@ GameObject:
 --- !u!224 &1996935068
 RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22487920, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 224905903503837468, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1996935067}
@@ -2334,6 +2336,7 @@ RectTransform:
   m_LocalScale: {x: 0.54049295, y: 0.54049295, z: 0.54049295}
   m_Children:
   - {fileID: 685073956}
+  - {fileID: 1184252440}
   m_Father: {fileID: 948298657}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2345,11 +2348,11 @@ RectTransform:
 --- !u!114 &1996935069
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11487918, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 114774802219343560, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1996935067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
@@ -2373,7 +2376,7 @@ MonoBehaviour:
 --- !u!222 &1996935070
 CanvasRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 22287920, guid: 71470901b9fe0444394ea72f07f208ac,
+  m_PrefabParentObject: {fileID: 222838726368265128, guid: 96cd1a9405a27de48a89121d3ecba3db,
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1996935067}
