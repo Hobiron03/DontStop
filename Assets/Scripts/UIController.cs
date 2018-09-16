@@ -28,6 +28,18 @@ public class UIController : MonoBehaviour {
 
     public GameObject PoseUI;
 
+    public GameObject resultCoinUI;
+    TextMeshProUGUI resultCoinScript;
+    private int resultCoinUINum = 0;
+
+    public GameObject resultDistUI;
+    TextMeshProUGUI resultDistScript;
+    private int resultDistNum = 0;
+
+    public GameObject resultScoreUI;
+    TextMeshProUGUI resultScoreScript;
+    private int resultScoreNum = 0;
+
     private float CanPlayTime = 30.0f;
     private float count;
 
@@ -37,20 +49,70 @@ public class UIController : MonoBehaviour {
     private float timeInterval = 1.0f;
     private float time = 1.0f;
 
+    public int gameScore = 0;
 
     private IEnumerator resultDisplayCoroutine()
     {
         DisplayFinishText();
-
+        resultUI.SetActive(true);
         yield return new WaitForSeconds(1.5f);
 
         DisplayRsult();
+        yield return new WaitForSeconds(0.4f);
 
-        Debug.Log("1byoumattayo");
+        DOTween.To(() => ResultCoinNum, (x) => ResultCoinNum = x, coinNum, 0.3f);
+        yield return new WaitForSeconds(0.2f);
+
+        DOTween.To(() => ResultDistNum, (x) => ResultDistNum = x, dist, 0.3f);
+        yield return new WaitForSeconds(0.2f);
+
+        DOTween.To(() => resultScoreNum, (x) => resultScoreNum = x, coinNum*2 + dist, 0.5f);
+
+
     }
 
-	// Use this for initialization
-	void Start ()
+    public int ResultCoinNum
+    {
+        set
+        {
+            resultCoinUINum = value;
+            resultCoinScript.text = resultCoinUINum.ToString();
+        }
+        get
+        {
+            return resultCoinUINum;
+        }
+    }
+
+
+    public int ResultDistNum
+    {
+        set
+        {
+            resultDistNum = value;
+            resultDistScript.text = resultDistScript.ToString();
+        }
+        get
+        {
+            return resultDistNum;
+        }
+    }
+
+    public int ResultScoreNum
+    {
+        set
+        {
+            resultScoreNum = value;
+            resultScoreScript.text = resultScoreScript.ToString();
+        }
+        get
+        {
+            return resultScoreNum;
+        }
+    }
+
+    // Use this for initialization
+    void Start ()
     {
         timeScript = timerUI.GetComponent<TextMeshProUGUI>();
         timeScript.text = CanPlayTime.ToString("F1");
@@ -61,6 +123,15 @@ public class UIController : MonoBehaviour {
 
         coinScript = CoinUI.GetComponent<TextMeshProUGUI>();
         coinScript.text = coinNum.ToString();
+
+        resultCoinScript = resultCoinUI.GetComponent<TextMeshProUGUI>();
+        resultCoinScript.text = resultCoinUINum.ToString();
+
+        resultDistScript = resultDistUI.GetComponent<TextMeshProUGUI>();
+        resultDistScript.text = resultDistNum.ToString();
+
+        resultScoreScript = resultScoreUI.GetComponent<TextMeshProUGUI>();
+        resultScoreScript.text = resultScoreNum.ToString();
 
 	}
 	
@@ -172,6 +243,7 @@ public class UIController : MonoBehaviour {
     void DisplayRsult()
     {
         systemUI.SetActive(false);
+        
         resultUI.GetComponent<RectTransform>().DOLocalMoveY(0, 0.3f);
     }
 
