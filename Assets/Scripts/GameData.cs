@@ -10,7 +10,7 @@ public class GameData{
 
     public bool isSoundOn = true;
 
-    public float gameBgmVolume = 0.7f;
+    public float gameBgmVolume = 0.5f;
     public float poseBgmVolume = 0.2f;
     public float seVolume = 1.0f;
 

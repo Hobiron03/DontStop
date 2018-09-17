@@ -272,6 +272,7 @@ public class PlayerController : MonoBehaviour {
     void PlayerDamaged()
     {
         mainCamera.GetComponent<CameraController>().ShakeCamera();//被ダメージのカメラの揺れ演出
+        UIController.GetComponent<UIController>().PlayerDamagedUI();
         isDamaged = true;
         audio.PlayOneShot(damageSound);
     }

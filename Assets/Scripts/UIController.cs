@@ -17,6 +17,10 @@ public class UIController : MonoBehaviour {
     public GameObject finishUI;
     public GameObject systemUI;
 
+    public GameObject mainasUI;
+    Vector3 mainasUIPos = new Vector3(135.4f, -7.0f, 0);
+    Vector3 mainusInitPos = new Vector3(93f, 11f, 0f);
+
     public GameObject timerUI;
     TextMeshProUGUI timeScript;
     private RectTransform timerUITransform;
@@ -46,6 +50,8 @@ public class UIController : MonoBehaviour {
     public GameObject continueButtonUI;
     public GameObject restartButtonUI;
     public AudioClip buttonSE;
+    public AudioClip resultSE;
+    public AudioClip resultSE2;
 
     private float CanPlayTime = 30.0f;
     private float count;
@@ -70,13 +76,18 @@ public class UIController : MonoBehaviour {
 
         DOTween.To(() => ResultCoinNum, (x) => ResultCoinNum = x, coinNum, 0.4f);
         yield return new WaitForSeconds(0.4f);
+        seAudioSource.PlayOneShot(resultSE);
+
 
         DOTween.To(() => ResultDistNum, (x) => ResultDistNum = x, dist, 0.4f);
         yield return new WaitForSeconds(0.4f);
+        seAudioSource.PlayOneShot(resultSE);
 
-        
+        yield return new WaitForSeconds(0.3f);
+
         DOTween.To(() => ResultScoreNum, (x) => ResultScoreNum = x, gameScore, 0.6f);
         yield return new WaitForSeconds(0.5f);
+        seAudioSource.PlayOneShot(resultSE2);
         resultScoreUI.GetComponent<RectTransform>().DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
 
 
@@ -273,6 +284,33 @@ public class UIController : MonoBehaviour {
         systemUI.SetActive(false);
         
         resultUI.GetComponent<RectTransform>().DOLocalMoveY(0, 0.3f);
+    }
+
+    public void PlayerDamagedUI()
+    {
+        var mainasUIInitTransform = mainasUI.GetComponent<RectTransform>();
+
+        mainasUI.SetActive(true);
+        mainasUIInitTransform.DOLocalMove(mainasUIPos, 1.0f);
+
+        Invoke("SetActiveFalse", 1.0f);
+
+        coinNum -= 5;
+        if(coinNum > 0)
+        {
+            coinScript.text = coinNum.ToString();
+        }
+        else
+        {
+            coinNum = 0;
+            coinScript.text = "0";
+        }
+        
+    }
+    public void SetActiveFalse()
+    {
+        mainasUI.SetActive(false);
+        mainasUI.GetComponent<RectTransform>().localPosition = mainusInitPos;
     }
 
     public void PushPoseButton()

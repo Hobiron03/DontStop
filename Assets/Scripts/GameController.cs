@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
 
     public GameObject player;
 
+    public AudioClip buttonSE;
+
     Fade fade;
 
     private int countdown;
