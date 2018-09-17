@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour {
     {
         audio = GetComponent<AudioSource>();
         playerMesh = GetComponent<MeshRenderer>();
+
+        
 	}
 	
 	// Update is called once per frame

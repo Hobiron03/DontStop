@@ -10,6 +10,9 @@ public class UIController : MonoBehaviour {
 
     public GameObject gameController;
 
+    public GameObject playSEObj;
+    private AudioSource seAudioSource;
+
     public GameObject resultUI;
     public GameObject finishUI;
     public GameObject systemUI;
@@ -40,6 +43,10 @@ public class UIController : MonoBehaviour {
     TextMeshProUGUI resultScoreScript;
     private int resultScoreNum = 0;
 
+    public GameObject continueButtonUI;
+    public GameObject restartButtonUI;
+    public AudioClip buttonSE;
+
     private float CanPlayTime = 30.0f;
     private float count;
 
@@ -50,6 +57,7 @@ public class UIController : MonoBehaviour {
     private float time = 1.0f;
 
     public int gameScore = 0;
+    public float seVolume = 1.0f;
 
     private IEnumerator resultDisplayCoroutine()
     {
@@ -60,13 +68,16 @@ public class UIController : MonoBehaviour {
         DisplayRsult();
         yield return new WaitForSeconds(0.4f);
 
-        DOTween.To(() => ResultCoinNum, (x) => ResultCoinNum = x, coinNum, 0.3f);
-        yield return new WaitForSeconds(0.2f);
+        DOTween.To(() => ResultCoinNum, (x) => ResultCoinNum = x, coinNum, 0.4f);
+        yield return new WaitForSeconds(0.4f);
 
-        DOTween.To(() => ResultDistNum, (x) => ResultDistNum = x, dist, 0.3f);
-        yield return new WaitForSeconds(0.2f);
+        DOTween.To(() => ResultDistNum, (x) => ResultDistNum = x, dist, 0.4f);
+        yield return new WaitForSeconds(0.4f);
 
-        DOTween.To(() => resultScoreNum, (x) => resultScoreNum = x, coinNum*2 + dist, 0.5f);
+        
+        DOTween.To(() => ResultScoreNum, (x) => ResultScoreNum = x, gameScore, 0.6f);
+        yield return new WaitForSeconds(0.5f);
+        resultScoreUI.GetComponent<RectTransform>().DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
 
 
     }
@@ -90,7 +101,7 @@ public class UIController : MonoBehaviour {
         set
         {
             resultDistNum = value;
-            resultDistScript.text = resultDistScript.ToString();
+            resultDistScript.text = resultDistNum.ToString();
         }
         get
         {
@@ -103,12 +114,26 @@ public class UIController : MonoBehaviour {
         set
         {
             resultScoreNum = value;
-            resultScoreScript.text = resultScoreScript.ToString();
+            resultScoreScript.text = resultScoreNum.ToString();
         }
         get
         {
             return resultScoreNum;
         }
+    }
+
+    private void Awake()
+    {
+        if (GameData.Instance.isSoundOn)
+        {
+            seVolume = GameData.Instance.seVolume;
+        }
+        else
+        {
+            seVolume = 0;
+        }
+        seAudioSource = playSEObj.GetComponent<AudioSource>();
+        seAudioSource.volume = seVolume;
     }
 
     // Use this for initialization
@@ -132,6 +157,8 @@ public class UIController : MonoBehaviour {
 
         resultScoreScript = resultScoreUI.GetComponent<TextMeshProUGUI>();
         resultScoreScript.text = resultScoreNum.ToString();
+
+        
 
 	}
 	
@@ -201,6 +228,7 @@ public class UIController : MonoBehaviour {
             isStartPerform = false;
 
             gameController.GetComponent<GameController>().GameFinish();
+            gameScore = coinNum * 2 + dist;
             StartCoroutine("resultDisplayCoroutine");
         }
     }
@@ -249,17 +277,23 @@ public class UIController : MonoBehaviour {
 
     public void PushPoseButton()
     {
+      
         gameController.GetComponent<GameController>().Pause();
-        PoseUI.GetComponent<AudioSource>().Play();
+        seAudioSource.PlayOneShot(buttonSE);
     }
 
     public void PushContinueButton()
     {
+       
         gameController.GetComponent<GameController>().CancelPause();
+        seAudioSource.PlayOneShot(buttonSE);
     }
 
     public void PushRestartButton()
     {
+
         gameController.GetComponent<GameController>().Restart();
+        Debug.Log("Helllo");
+        seAudioSource.PlayOneShot(buttonSE);
     }
 }

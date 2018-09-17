@@ -9,10 +9,7 @@ public class SkyController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-     //   if (DontDestroyEnable)
-      //  {
-        //    DontDestroyOnLoad(gameObject);
-       // }
+
 	}
 	
 	// Update is called once per frame
